@@ -1,0 +1,99 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e9b9e9"><title>Ma Progression STAR</title><link rel="manifest" href="manifest.webmanifest"><style>
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#fff0fa,#e8f7ff);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#30254d}main{max-width:750px;margin:auto;padding:18px 15px 95px}h1{font-size:30px;margin:6px 0;color:#7041a4}h2{font-size:23px}.hero{text-align:center;padding:15px}.card{background:white;border-radius:21px;padding:17px;margin:13px 0;box-shadow:0 6px 20px #754b9716}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tile{border:0;border-radius:17px;padding:19px 9px;background:#f9dff2;font-size:17px;font-weight:700;color:#493167}.tile:nth-child(even){background:#e4f3ff}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #7756ba}.tabs{display:flex;gap:6px;overflow:auto;padding:5px 0}.tab{border:0;border-radius:14px;background:#eee8f6;padding:10px;white-space:nowrap;color:#493167}.on,.primary{background:#8051bd!important;color:white!important}.primary{border:0;border-radius:13px;padding:12px 16px}.item{padding:13px 0;border-bottom:1px solid #eee}.item:last-child{border:0}.status{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.status button{border:1px solid #ddd;border-radius:12px;padding:8px;background:#fff}.status button.active{border:2px solid #8051bd;background:#f3eaff}.progress{height:13px;border-radius:15px;background:#eee;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,#e96da8,#7851c4);width:0}input,textarea,select{font:inherit;max-width:100%;border:1px solid #d9d2e2;border-radius:10px;padding:10px}input[type=file]{width:100%}video{width:100%;max-height:280px;border-radius:12px;background:#111}.muted{color:#6f677a;font-size:13px}.pill{background:#f2e6fc;border-radius:99px;padding:6px 10px;display:inline-block}.hidden{display:none!important}nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;border-top:1px solid #eee;display:flex;justify-content:center;gap:18px;padding:11px}nav button{border:0;background:none;color:#6541a0;font-size:12px}a{color:#6541a0}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.danger{color:#a22953}.badge{display:inline-block;border-radius:12px;background:#fff0b8;padding:9px;margin:4px}.section{display:none}.section.show{display:block}
+</style></head><body><main>
+<section id="home" class="section show"><div class="hero"><div style="font-size:54px">⛸️✨</div><h1>Ma Progression STAR</h1><p>Le carnet de <b id="hello">ma patineuse</b> 💜</p><span class="pill">🇨🇦 Français · STAR 1 à 5</span></div><div class="grid"><button class="tile" onclick="page('levels')">⭐ Mes niveaux</button><button class="tile" onclick="page('videos')">🎥 Mes vidéos</button><button class="tile" onclick="page('calendar')">📅 Calendrier</button><button class="tile" onclick="page('rewards')">🏆 Récompenses</button></div><div class="card"><b>Ma progression personnelle</b><div class="progress" style="margin-top:12px"><div class="bar" id="totalbar"></div></div><p id="totalpct"></p></div><div class="card"><b>📚 Démonstrations officielles en français</b><p class="muted">Accès aux ressources de Patinage Canada, classées par discipline.</p><a target="_blank" rel="noopener" href="https://info.skatecanada.ca/index.php/fr/25-guides/433-guide-de-star-1-a-5.html">Ouvrir les vidéos STAR 1 à 5 ↗</a></div></section>
+<section id="levels" class="section"><h2>⭐ Mes niveaux</h2><div class="grid" id="levelgrid"></div><p class="muted">Les listes sont un carnet personnalisable, pas une reproduction complète des feuilles officielles d'évaluation.</p></section>
+<section id="level" class="section"><button class="tab" onclick="page('levels')">← Niveaux</button><h2 id="lt"></h2><div class="card"><b>Progression de cette discipline</b><div class="progress" style="margin-top:12px"><div class="bar" id="levelbar"></div></div><p id="levelpct"></p></div><div class="tabs" id="disc"></div><div class="card" id="items"></div><div class="card"><b>➕ Ajouter un élément avec l'entraîneur</b><div class="row"><input id="newitem" placeholder="Nom de l'élément" style="flex:1;min-width:0"><button class="primary" onclick="addItem()">Ajouter</button></div></div><div class="card"><b>🎬 Vidéos officielles</b><p class="muted">La vidéothèque officielle donne des exemples de normes et des tutoriels. Les vidéos s'ouvrent dans le navigateur.</p><a target="_blank" rel="noopener" href="https://info.skatecanada.ca/index.php/fr/25-guides/433-guide-de-star-1-a-5.html">Voir les vidéos de Patinage Canada ↗</a></div></section>
+<section id="videos" class="section"><h2>🎥 Mes vidéos</h2><div class="card"><label>Élément travaillé<br><input id="videoLabel" placeholder="Ex. : Salchow, danse, habileté" style="width:100%"></label><p><label>Choisir ou filmer une vidéo<br><input id="videoInput" type="file" accept="video/*" capture="environment"></label></p><button class="primary" onclick="saveVideo()">Enregistrer sur cet appareil</button><p class="muted">Les vidéos sont conservées localement dans le navigateur, si l'espace disponible le permet. Elles ne sont pas envoyées à un serveur. Une suppression des données du navigateur peut les effacer.</p></div><div id="videoList"></div></
+<div class="card" style="font-size:18px;line-height:1.6">
+<h2>🎥 Vidéos officielles Patinage Canada</h2>
+<p>⛸️ Vidéothèque du développement du patinage</p>
+<a class="btn" target="_blank" rel="noopener" href="https://youtube.com/@videothequedudeveloppement6806">▶️ Ouvrir la vidéothèque YouTube</a>
+
+<style>
+.niveaux-star {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px 8px;
+}
+.niveaux-star span,
+.niveaux-star button {
+  white-space: nowrap;
+}
+</style><div  style="margin-top:20px"><h3>⭐ Choisir un niveau</h3><div class="niveaux-star"><p><button type="button" onclick="document.getElementById('videoStar1').style.display='block'">⭐ STAR 1</button> &nbsp; ⭐ STAR 2 &nbsp; ⭐ STAR 3 &nbsp; ⭐ STAR 4 &nbsp; ⭐ STAR 5</p><p>⭐ STAR 6 &nbsp; ⭐ STAR 7 &nbsp; ⭐ STAR 8 &nbsp; ⭐ STAR 9 &nbsp; ⭐ STAR 10 &nbsp; 🥇 OR</p></div></div>
+<div id="videoStar1" style="display:none;margin-top:15px"><h3>⭐ STAR 1</h3><p>⛸️ Style libre</p><p>🌀 Habiletés</p><p>💃 Danse</p></div>
+</div>
+<!--<div class="card"><h3>⭐ STAR 1 — Style libre</h3>
+<p>⛸️ Saut de valse<br><a class="tab" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=Patinage+Canada+Saut+de+valse">
+
+-->
+</section>
+
+<!-- Nouvel Agenda -->
+
+<section id="calendar" class="section"><h2>📅 Mes entraînements</h2><div class="card"><label>Date<br><input id="date" type="date">
+<label>Heure<br><input id="time" type="time"></label>
+<label>Entraîneur<br><input id="coach" type="text" placeholder="Nom de l’entraîneur"></label>
+<label>Éléments à travailler<br><textarea id="elements" rows="3" style="width:100%" placeholder="Sauts, pirouettes, habiletés, danse..."></textarea></label>
+<label>Notes / commentaires<br><textarea id="notes" rows="3" style="width:100%" placeholder="Commentaires, conseils, choses à améliorer..."></textarea></label>
+
+<p><label>Ce que j'ai travaillé<br><textarea id="session" rows="3" style="width:100%"></textarea></label></p><button class="primary" onclick="addSession()">Ajouter l'entraînement</button></div><div id="sessions"></div></section>
+<section id="rewards" class="section"><h2>🏆 Mes récompenses</h2><div class="card"><p id="starcount"></p><div id="badges"></div><p class="muted">Les étoiles sont des encouragements personnels, pas des résultats officiels d'évaluation.</p></div><div class="card"><h3>🎯 Mes objectifs</h3><div id="goals"></div><div class="row"><input id="goal" placeholder="Nouvel objectif" style="flex:1;min-width:0"><button class="primary" onclick="addGoal()">Ajouter</button></div></div></section>
+<section id="profile" class="section"><h2>👧 Mon profil</h2><div class="card"><label>Prénom<br><input id="name" placeholder="Prénom de ta fille"></label><p><label>Mon niveau actuel<br><select id="currentLevel"><option>STAR 1</option><option selected>STAR 2</option><option>STAR 3</option><option>STAR 4</option><option>STAR 5</option></select></label></p><button class="primary" onclick="saveProfile()">Enregistrer</button></div><div class="card"><b>🔒 Mes données</b><p class="muted">Les notes, statuts et objectifs restent sur cet appareil. Fais une sauvegarde pour éviter de les perdre.</p><button class="primary" onclick="backup()">Exporter mes données</button><p><input type="file" accept="application/json" id="restore" onchange="restoreData(event)"></p></div></section>
+<p class="muted">Application familiale indépendante, non affiliée à Patinage Canada. Confirme les éléments et exigences avec l'entraîneur et les documents officiels.</p></main><nav><button onclick="page('home')">🏠<br>Accueil</button><button onclick="page('levels')">⭐<br>STAR</button><button onclick="page('videos')">🎥<br>Vidéos</button><button onclick="page('calendar')">📅<br>Agenda</button><button onclick="page('profile')">👧<br>Profil</button></nav>
+<script>
+const disciplines=[['libre','⛸️ Style libre'],['hab','⭐ Habiletés'],['danse','💃 Danse'],['art','🎭 Artistique']];
+const starter={
+'1-libre':['Saut de valse','Salchow simple','Boucle piquée simple','Pirouette debout avant','Pirouette debout arrière'],
+'2-libre':['Salchow simple','Boucle simple','Flip simple','Saut de valse + boucle piquée simple','Pirouette assise avant','Pirouette arabesque avant','Pirouette debout avec changement de pied'],
+'2-hab':['Carrés AR','Virages-3 AR','Cercle sur cercle AV','Virages multiples 2 pieds à 1 pied','Séquence de virages AVE'],
+'1-danse':['Pas progressifs avant','Chassés avant','Chassés glissés avant','Séquence de roulés swing avant extérieur','Roulés croisés avant extérieur'],
+'2-danse':['Valse hollandaise','Tango Canasta'],
+'3-danse':['Baby Blues'],
+'5-art':['Programme artistique — préparation avec mon entraîneur']
+};
+const storage='mps-v3';let state=JSON.parse(localStorage.getItem(storage)||'{"name":"","level":"STAR 2","statuses":{},"custom":{},"sessions":[],"goals":[] }'); level=2,discipline='libre';
+function persist(){localStorage.setItem(storage,JSON.stringify(state));refresh()}
+function page(id){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('show',x.id===id));window.scrollTo(0,0);refresh();if(id==='videos')renderVideos()}
+function key(){return level+'-'+discipline}
+							function liste(k){
+return state.custom[k]!==undefined?state.custom[k]:starter[k]||[];
+}
+function entries(k){return [...(starter[k]||[]),...(state.custom[k]||[])]}
+function openLevel(n){level=n;discipline='libre';renderLevel();page('level')}
+function renderLevel(){document.getElementById('lt').textContent='STAR '+level;document.getElementById('disc').innerHTML=disciplines.map(([k,t])=>`<button class="tab ${discipline===k?'on':''}" onclick="discipline='${k}';renderLevel()">${t}</button>`).join('');let k=key(),a=liste(k);document.getElementById('items').innerHTML=a.length?a.map((s,i)=>`<div class="item"><b>${esc(s)}</b><button onclick="editItem(${i})">✏️ Modifier</button><button onclick="deleteItem(${i})">🗑️ Supprimer</button><div class="status">${[['0','⚪ À découvrir'],['1','🔴 À travailler'],['2','🟡 En progrès'],['3','🟢 Réussi']].map(([v,t])=>`<button class="${(state.statuses[k+':'+i]||0)==v?'active':''}" onclick="setStatus(${i},${v})">${t}</button>`).join('')}</div></div>`).join(''):'<p>Aucun élément prérempli pour cette discipline. Ajoute les éléments avec ton entraîneur.</p>';let score=a.reduce((sum,_,i)=>sum+(state.statuses[k+':'+i]||0),0),pct=a.length?Math.round(score/a.length/3*100):0;document.getElementById('levelbar').style.width=pct+'%';document.getElementById('levelpct').textContent=pct+' % de progression personnelle'}
+function setStatus(i,v){state.statuses[key()+':'+i]=v;persist();renderLevel()}
+function editItem(i){k=key(),a=liste(k);letn=prompt('Nouveau nom',a[i]);if(!n||!n.trim())return;
+state.custom[k]=a.slice();
+state.custom[k][i]=n.trim();
+persist();renderLevel();}
+function deleteItem(i){
+let k=key(),a=liste(k);
+if(!confirm('Supprimer cet élément ?'))return;
+state.custom[k]=a.slice();
+state.custom[k].splice(i,1);
+persist();
+renderLevel();
+}
+function addItem(){let e=document.getElementById('newitem'),s=e.value.trim();if(!s)return;
+state.custom[key()]=liste(key()).slice();(state.custom[key()]??=[]).push(s);e.value='';persist();renderLevel()}
+function refresh(){document.getElementById('hello').textContent=state.name||'ma patineuse';document.getElementById('levelgrid').innerHTML=[1,2,3,4,5].map(n=>`<button class="tile" onclick="openLevel(${n})">✨ STAR ${n}</button>`).join('');let keys=Object.keys(starter).concat(Object.keys(state.custom).filter(k=>!starter[k]));let all=keys.flatMap(k=>liste(k).map((_,i)=>state.statuses[k+':'+i]||0));let pct=all.length?Math.round(all.reduce((a,b)=>a+b,0)/all.length/3*100):0;document.getElementById('totalbar').style.width=pct+'%';document.getElementById('totalpct').textContent=pct+' % de progression personnelle';document.getElementById('name').value=state.name||'';document.getElementById('currentLevel').value=state.level||'STAR 2';renderSessions();renderRewards()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function saveProfile(){state.name=document.getElementById('name').value.trim();state.level=document.getElementById('currentLevel').value;persist();page('home')}
+function addSession(){let d=document.getElementById('date').value,t=document.getElementById('session').value.trim();if(!d||!t)return alert('Ajoute une date et une note.');state.sessions.unshift({date:d,text:t});document.getElementById('session').value='';persist()}
+//
+addSession=function(){let d=document.getElementById('date').value,time=document.getElementById('time').value,coach=document.getElementById('coach').value.trim(),elements=document.getElementById('elements').value.trim(),notes=document.getElementById('notes').value.trim(),t=document.getElementById('session').value.trim();if(!d)return alert('Ajoute une date.');state.sessions.unshift({date:d,time:time,coach:coach,elements:elements,notes:notes,text:t});document.getElementById('session').value='';document.getElementById('elements').value='';document.getElementById('notes').value='';persist()}
+function editSession(i){let s=state.sessions[i];document.getElementById('date').value=s.date||'';document.getElementById('time').value=s.time||'';document.getElementById('coach').value=s.coach||'';document.getElementById('elements').value=s.elements||'';document.getElementById('notes').value=s.notes||'';document.getElementById('session').value=s.text||'';state.sessions.splice(i,1);persist();page('calendar')}
+function renderSessions(){document.getElementById('sessions').innerHTML=state.sessions.map((s,i)=>`<div class="card"><div class="row"><b>${esc(s.date)}</b>
+<button class="tab" onclick="editSession(${i})">✏️ Modifier</button>
+<button class="tab danger" onclick="state.sessions.splice(${i},1);persist()">Supprimer</button></div><p>${esc(s.text)}</p></div>`).join('')}
+function addGoal(){let e=document.getElementById('goal'),s=e.value.trim();if(!s)return;state.goals.push({text:s,done:false});e.value='';persist()}
+function toggleGoal(i){state.goals[i].done=!state.goals[i].done;persist()}
+function renderRewards(){let done=Object.values(state.statuses).filter(v=>v===3).length;let goals=state.goals.filter(g=>g.done).length;document.getElementById('starcount').textContent='⭐ '+(done*3+goals*2+state.sessions.length)+' étoiles gagnées';document.getElementById('badges').innerHTML=[['🌟 Premier élément',done>=1],['⛸️ 5 éléments réussis',done>=5],['📅 5 entraînements',state.sessions.length>=5],['🎯 Objectif atteint',goals>=1]].map(([t,yes])=>`<span class="badge" style="opacity:${yes?1:.4}">${t}</span>`).join('');document.getElementById('goals').innerHTML=state.goals.map((g,i)=>`<p><label><input type="checkbox" ${g.done?'checked':''} onchange="toggleGoal(${i})"> ${esc(g.text)}</label> <button class="tab danger" onclick="state.goals.splice(${i},1);persist()">×</button></p>`).join('')}
+function backup(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ma-progression-star-sauvegarde.json';a.click();URL.revokeObjectURL(a.href)}
+async function restoreData(e){let f=e.target.files[0];if(!f)return;try{let s=JSON.parse(await f.text());if(!s.statuses||!s.sessions||!s.goals)throw Error();if(confirm('Remplacer les données actuelles par cette sauvegarde ?')){state=s;persist();page('home')}}catch{alert('Fichier de sauvegarde invalide.')}}
+let dbp=new Promise((resolve,reject)=>{let r=indexedDB.open('mps-videos',1);r.onupgradeneeded=()=>r.result.createObjectStore('videos',{keyPath:'id'});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
+async function saveVideo(){let file=document.getElementById('videoInput').files[0];if(!file)return alert('Choisis une vidéo.');let label=document.getElementById('videoLabel').value.trim()||'Mon entraînement';try{let db=await dbp;let tx=db.transaction('videos','readwrite');tx.objectStore('videos').put({id:Date.now(),label,date:new Date().toLocaleDateString('fr-CA'),file});tx.oncomplete=()=>{document.getElementById('videoInput').value='';renderVideos();alert('Vidéo enregistrée sur cet appareil !')};tx.onerror=()=>alert("L'espace de stockage est peut-être insuffisant.")}catch{alert("Impossible d'enregistrer la vidéo sur cet appareil.")}}
+async function renderVideos(){let db=await dbp;let r=db.transaction('videos').objectStore('videos').getAll();r.onsuccess=()=>{document.getElementById('videoList').innerHTML='';r.result.reverse().forEach(v=>{let c=document.createElement('div');c.className='card';let h=document.createElement('b');h.textContent=v.label+' · '+v.date;c.append(h);let vid=document.createElement('video');vid.controls=true;vid.src=URL.createObjectURL(v.file);c.append(vid);let b=document.createElement('button');b.className='tab danger';b.textContent='Supprimer cette vidéo';b.onclick=()=>{if(confirm('Supprimer cette vidéo ?')){db.transaction('videos','readwrite').objectStore('videos').delete(v.id);c.remove()}};c.append(b);document.getElementById('videoList').append(c)})}}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js');document.getElementById('date').value=new Date().toLocaleDateString('en-CA');refresh();
+</script></body></html>
